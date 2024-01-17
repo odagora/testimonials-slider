@@ -1,0 +1,73 @@
+.container {
+  margin: 3em -30em 0 0;
+  text-align: left;
+  width: 100%;
+}
+
+.slider {
+  flex-direction: row-reverse;
+  height: auto;
+}
+
+.slider-container {
+  width: 1440px;
+}
+
+.slider-image,
+.slider-content {
+  height: auto;
+  width: 50%;
+}
+
+.slider-image {
+  margin: 0 6em 6em;
+  width: 60%;
+  justify-content: flex-start;
+  background-size: contain;
+  background-position: center;
+  & figure {
+    margin-left: 7em;
+  }
+  & img {
+    position: relative;
+    width: 100%;
+  }
+}
+
+.slider-content {
+  align-items: center;
+  background-image: url('../images/pattern-curve.svg');
+  background-size: 80% 20%;
+  background-position: left bottom;
+  & .quote {
+    margin: 0;
+    position: relative;
+    padding-bottom: 1em;
+    width: 670px;
+    font-size: 3.3rem;
+    &::before {
+      position: absolute;
+      content: '';
+      background: url('../images/pattern-quotes.svg') left top / contain no-repeat;
+      display: block;
+      width: 115px;
+      height: 100px;
+      top: -2em;
+      left: 3em;
+    }
+  }
+  & .author {
+    display: flex;
+    & .name,
+    .job-title {
+      font-size: 2rem;
+    }
+  }
+}
+
+.slider-controls {
+  top: 575px;
+  left: 855px;
+  height: 55px;
+  width: 110px;
+}
