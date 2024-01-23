@@ -4,7 +4,7 @@
   width: 100%;
 }
 
-.slider {
+.slide {
   flex-direction: row-reverse;
   height: auto;
 }
@@ -13,20 +13,20 @@
   width: 1440px;
 }
 
-.slider-image,
-.slider-content {
+.slide-image,
+.slide-content {
   height: auto;
   width: 50%;
 }
 
-.slider-image {
+.slide-image {
   margin: 0 6em 6em;
   width: 60%;
   justify-content: flex-start;
   background-size: contain;
   background-position: center;
   & figure {
-    margin-left: 7em;
+    margin: 3em 0 0 7em;
   }
   & img {
     position: relative;
@@ -34,7 +34,7 @@
   }
 }
 
-.slider-content {
+.slide-content {
   align-items: center;
   background-image: url('../images/pattern-curve.svg');
   background-size: 80% 20%;
@@ -66,7 +66,7 @@
 }
 
 .slider-controls {
-  top: 575px;
+  top: 545px;
   left: 855px;
   height: 55px;
   width: 110px;
