@@ -7,16 +7,11 @@ let currentSlide = 0;
 const numberOfSlides = slides.length;
 
 function disableButton() {
-  if (currentSlide === 0) {
-    previousButton.classList.add('disabled');
-    nextButton.classList.remove('disabled');
-  } else if (currentSlide === numberOfSlides - 1) {
-    nextButton.classList.add('disabled');
-    previousButton.classList.remove('disabled');
-  } else {
-    nextButton.classList.remove('disabled');
-    previousButton.classList.remove('disabled');
-  }
+  const isAtFirstSlide = currentSlide === 0;
+  const isAtLastSlide = currentSlide === numberOfSlides - 1;
+
+  previousButton.classList.toggle('disabled', isAtFirstSlide);
+  nextButton.classList.toggle('disabled', isAtLastSlide);
 }
 
 function transitionSlide() {
