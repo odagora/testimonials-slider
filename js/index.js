@@ -23,13 +23,13 @@ window.addEventListener('load', () => {
 })
 
 previousButton.addEventListener('click', () => {
-  currentSlide = currentSlide - 1;
+  currentSlide--;
   transitionSlide();
   disableButton();
 })
 
 nextButton.addEventListener('click', () => {
-  currentSlide = currentSlide + 1;
+  currentSlide++;
   transitionSlide();
   disableButton();
 })
