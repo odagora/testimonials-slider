@@ -13,7 +13,14 @@ function disableButton() {
   } else if (currentSlide === numberOfSlides - 1) {
     nextButton.classList.add('disabled');
     previousButton.classList.remove('disabled');
+  } else {
+    nextButton.classList.remove('disabled');
+    previousButton.classList.remove('disabled');
   }
+}
+
+function transitionSlide() {
+  sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
 
 window.addEventListener('load', () => {
@@ -21,11 +28,13 @@ window.addEventListener('load', () => {
 })
 
 previousButton.addEventListener('click', () => {
-  currentSlide = (currentSlide - 1 < 0 ? numberOfSlides - 1 : currentSlide - 1);
+  currentSlide = currentSlide - 1;
+  transitionSlide();
   disableButton();
 })
 
 nextButton.addEventListener('click', () => {
-  currentSlide = (currentSlide + 1 === numberOfSlides ? 0 : currentSlide + 1);
+  currentSlide = currentSlide + 1;
+  transitionSlide();
   disableButton();
 })
