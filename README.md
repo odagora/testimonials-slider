@@ -86,6 +86,7 @@ Desktop version
 - Use of CSS Grid in complex layouts
 - Use of animations with CSS
 - Implementation of UI testing
+- Use of OOP pattern
 - Use of accessibility principles
 - Cross-browser support
 - Use of web components for reusability
