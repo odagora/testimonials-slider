@@ -1,4 +1,4 @@
-class Slider {
+export class Slider {
   constructor(containerSelector, slideSelector, previousButtonSelector, nextButtonSelector) {
     this.sliderContainer = document.querySelector(containerSelector);
     this.slides = document.querySelectorAll(slideSelector);
@@ -6,24 +6,27 @@ class Slider {
     this.nextButton = document.querySelector(nextButtonSelector);
     this.currentSlide = 0;
     this.numberOfSlides = this.slides.length;
-    this.init();
   }
 
   init() {
-    this.disableButton();
+    this.disableButton(this.currentSlide);
     this.addEventListeners();
   }
 
-  disableButton() {
-    const isAtFirstSlide = this.currentSlide === 0;
-    const isAtLastSlide = this.currentSlide === this.numberOfSlides - 1;
+  disableButton(currentSlide) {
+    const isAtFirstSlide = currentSlide === 0;
+    const isAtLastSlide = currentSlide === this.numberOfSlides - 1;
 
-    this.previousButton.classList.toggle('disabled', isAtFirstSlide);
-    this.nextButton.classList.toggle('disabled', isAtLastSlide);
+    if (this.previousButton && this.nextButton) {
+      this.previousButton.classList.toggle('disabled', isAtFirstSlide);
+      this.nextButton.classList.toggle('disabled', isAtLastSlide);
+    }
   }
 
   transitionSlide() {
-    this.sliderContainer.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+    if (this.sliderContainer) {
+      this.sliderContainer.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+    }
   }
 
   addEventListeners() {
@@ -35,16 +38,24 @@ class Slider {
         this.currentSlide++;
       }
       this.transitionSlide();
-      this.disableButton();
+      this.disableButton(this.currentSlide);
     }
 
-    this.previousButton.addEventListener('click', () => {
-      handleButtonClick.call(this, 'previous');
-    })
-    this.nextButton.addEventListener('click', () => {
-      handleButtonClick.call(this, 'next');
-    })
+    // Bind the handleButtonClick function to the current instance of Slider
+    const boundHandleButtonClick = handleButtonClick.bind(this);
+
+    if (this.previousButton) {
+      this.previousButton.addEventListener('click', () => {
+        boundHandleButtonClick('previous');
+      });
+    }
+    if (this.nextButton) {
+      this.nextButton.addEventListener('click', () => {
+        boundHandleButtonClick('next');
+      });
+    }
   }
 }
 
 const slider = new Slider('.slider-container', '.slide', '.previous', '.next')
+slider.init();
