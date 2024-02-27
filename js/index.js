@@ -30,7 +30,7 @@ export class Slider {
   }
 
   addEventListeners() {
-    function handleButtonClick(direction) {
+    const handleButtonClick = (direction) => {
       if (direction === 'previous') {
         this.currentSlide--;
       }
@@ -41,17 +41,14 @@ export class Slider {
       this.disableButton(this.currentSlide);
     }
 
-    // Bind the handleButtonClick function to the current instance of Slider
-    const boundHandleButtonClick = handleButtonClick.bind(this);
-
     if (this.previousButton) {
       this.previousButton.addEventListener('click', () => {
-        boundHandleButtonClick('previous');
+        handleButtonClick('previous');
       });
     }
     if (this.nextButton) {
       this.nextButton.addEventListener('click', () => {
-        boundHandleButtonClick('next');
+        handleButtonClick('next');
       });
     }
   }
