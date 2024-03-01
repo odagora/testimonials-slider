@@ -80,6 +80,46 @@ Desktop version
       nextButton.classList.toggle('disabled', isAtLastSlide);
     }
     ``````
+4. Create a DOM `document` using the [DOMParser](#useful-resources) to mock the HTML structure. Select the nodes and pass them as arguments to a Class:
+    ```js
+    beforeEach(() => {
+      // Define an html structure using template literals
+      const html = `
+        <div class="slider-container"></div>
+        <div class="slider-controls">
+          <button class="previous" aria-label="Previous"></button>
+          <button class="next" aria-label="Next"></button>
+        </div>
+      `;
+      // Create a new DOMParser instance
+      const parser = new DOMParser();
+      // Parse the string into a DOM document
+      dom = parser.parseFromString(html, 'text/html');
+
+      // Select all the nodes required to instantiate a Class
+      sliderContainer = dom.querySelector('.slider-container');
+      previousButton = dom.querySelector('.previous');
+      nextButton = dom.querySelector('.next');
+
+      // Create a new instance of 'Slider' and passing the nodes as arguments
+      slider = new Slider({ sliderContainer, previousButton, nextButton, slides})
+    })
+    ```
+5. Use of spies to keep track of usage for `document` native methods like `querySelector`:
+    ```js
+      jest.spyOn(document, 'querySelector').mockImplementation((selector) => {
+        if (selector === '.slider-container') {
+          return sliderContainer;
+        }
+      })
+    ```
+6. Use of spies to keep track of usage for custom and lifecycle methods in web components:
+    ```js
+    // Spy on 'render' method of the 'slideItem' instance
+    const renderSpy = jest.spyOn(slideItem, 'render');
+    // Spy on the 'connectedCallback' lifecycle method of the 'slideItem' instance
+    const connectedCallbackSpy = jest.spyOn(slideItem, 'connectedCallback');
+    ```
 ### Continued development
 
 - Use of new CSS features like container queries
@@ -96,6 +136,7 @@ Desktop version
 - [toggle() JavaScript method](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle) - This helped me for toggling an HTMLElement class. I liked to use the `force`` argument because it gives me a more simple logic without using too much conditionals.
 - [MDN multiple backgrounds](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Using_multiple_backgrounds) - This is an amazing resource showing how can multiple backgrounds been applied with ease.
 - [Flexbox: flex-grow, flex-shrink y flex-basis](https://dev.to/duxtech/flexbox-flex-grow-flex-shrink-y-flex-basis-o96) - This is an amazing article describing in detail the use of these three flexbox properties.
+- [DOMparser() interface](https://developer.mozilla.org/en-US/docs/Web/API/DOMParser) - Official MDN docs describing in detail the use of this   interface to parse HTML from a string into a DOM document.
 
 ## Author
 
