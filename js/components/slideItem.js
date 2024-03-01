@@ -1,11 +1,11 @@
 export class SlideItem extends HTMLElement {
   constructor({ imageSrc, imageAlt, quoteText, name, jobTitle }) {
     super();
+    this.name = name;
+    this.jobTitle = jobTitle;
     this.imageSrc = imageSrc;
     this.imageAlt = imageAlt;
     this.quoteText = quoteText;
-    this.name = name;
-    this.jobTitle = jobTitle;
   }
 
   connectedCallback() {
@@ -14,12 +14,12 @@ export class SlideItem extends HTMLElement {
 
   getStyles() {
     return /*css*/`
-    <style>
-      slide-item {
-        flex: 1 0 100%;
-      }
-    </style>
-    `
+      <style>
+        slide-item {
+          flex: 1 0 100%;
+        }
+      </style>
+      `
   }
 
   render() {
